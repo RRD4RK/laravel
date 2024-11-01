@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('explorers', function (Blueprint $table) {
+        Schema::create('contatos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('idade');
-            $table->float('longitude');
-            $table->float('latitude');
+            $table->string('cpf');
+            $table->string('cep');
+            $table->string('numero');
+            $table->string('whatsapp');
             $table->timestamps();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('explorers');
+        Schema::dropIfExists('contatos');
     }
 };
